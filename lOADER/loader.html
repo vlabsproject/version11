@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Virtual Labs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../lOADER/loader.css">
+
+</head>
+<body>
+<div class="Heading-text">WELCOME TO VIRTUAL LABS</div>
+<div class="Subheading-text">CREATED BY VIDYALANKAR INSTITUTE OF TECHNOLOGY </div>
+<div class="progress"></div>
+<script>
+  // Simulate loading progress
+  setTimeout(() => {
+      document.querySelector('.progress').classList.add('completed');
+      setTimeout(() => {
+          window.location.href = '../INTRODUCTION/Introduction.html'; // Replace with the URL of the page you want to redirect to
+      }, 3000);
+  }, 3000); // Change the timeout value as per your requirement
+</script>
+</body>
+</html>
