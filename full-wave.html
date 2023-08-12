@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Op-Amp Full Wave Rectifier Graph</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+
+        #parameter-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            margin-right: 5px;
+        }
+
+        input[type="range"] {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Op-Amp Full Wave Rectifier Graph</h1>
+    <div id="parameter-container">
+        <label for="frequencySlider">Frequency:</label>
+        <input type="range" id="frequencySlider" min="0.1" max="2" step="0.1" value="0.5">
+        <span id="frequencyValue">0.5</span> Hz
+
+        <label for="amplitudeSlider">Amplitude:</label>
+        <input type="range" id="amplitudeSlider" min="50" max="200" step="10" value="100">
+        <span id="amplitudeValue">100</span>
+    </div>
+    <div id="graph-container">
+        <div>
+            <h2>Input (IP) Graph</h2>
+            <canvas id="inputGraph" width="800" height="300"></canvas>
+        </div>
+        <div>
+            <h2>Output (OP) Graph</h2>
+            <canvas id="outputGraph" width="800" height="300"></canvas>
+        </div>
+    </div>
+
+
+    <script>
+        // basics define kiya 
+        const inputCanvas = document.getElementById('inputGraph');
+        const inputCtx = inputCanvas.getContext('2d');
+
+        const outputCanvas = document.getElementById('outputGraph');
+        const outputCtx = outputCanvas.getContext('2d');
+
+        // Function to update the frequency and amplitude ke values ko 
+        function updateParameters() {
+            const frequency = parseFloat(document.getElementById('frequencySlider').value);
+            const amplitude = parseInt(document.getElementById('amplitudeSlider').value);
+            document.getElementById('frequencyValue').textContent = frequency.toFixed(1);
+            document.getElementById('amplitudeValue').textContent = amplitude;
+
+            // Redraw the graphs
+            drawInputGraph(frequency, amplitude);
+            drawOutputGraph(frequency, amplitude);
+        }
+
+
+
+        // Add event listeners for input changes
+
+        document.getElementById('frequencySlider').addEventListener('input', updateParameters);
+        document.getElementById('amplitudeSlider').addEventListener('input', updateParameters);
+
+
+
+
+
+        // main code idhar se start
+        // Function to draw the input AC source graph
+        function drawInputGraph(frequency, amplitude) {
+            // Clear the canvas
+            inputCtx.clearRect(0, 0, inputCanvas.width, inputCanvas.height);
+
+            // Draw the axes
+            inputCtx.beginPath();
+            inputCtx.moveTo(0, inputCanvas.height / 2);
+            inputCtx.lineTo(inputCanvas.width, inputCanvas.height / 2);
+            inputCtx.moveTo(0, 0);
+            inputCtx.lineTo(0, inputCanvas.height);
+            inputCtx.strokeStyle = '#000';
+            inputCtx.stroke();
+
+
+
+
+            // Draw the input waveform
+            inputCtx.beginPath();
+            for (let x = 0; x <= inputCanvas.width; x++) {
+                const t = x / inputCanvas.width; // Normalized time from 0 to 1
+                const angle = t * 8 * Math.PI * frequency;
+                const y = amplitude * Math.sin(angle) + inputCanvas.height / 2;
+                inputCtx.lineTo(x, y);
+            }
+            inputCtx.strokeStyle = 'blue';
+            inputCtx.stroke();
+
+            // Label the graph
+            inputCtx.font = '16px Arial';
+            inputCtx.fillStyle = 'blue';
+            inputCtx.fillText('Input (IP)', 10, 20);
+        }
+
+
+
+
+
+//        main op code bruh
+        // Function to draw the output waveform of the full wave rectifier
+        function drawOutputGraph(frequency, amplitude) {
+            // Clear the canvas
+            outputCtx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+
+            // Draw the axes
+            outputCtx.beginPath();
+            outputCtx.moveTo(0, outputCanvas.height / 2);
+            outputCtx.lineTo(outputCanvas.width, outputCanvas.height / 2);
+            outputCtx.moveTo(0, 0);
+            outputCtx.lineTo(0, outputCanvas.height);
+            outputCtx.strokeStyle = '#000';
+            outputCtx.stroke();
+
+            // Draw the output waveform of the full wave rectifier
+            outputCtx.beginPath();
+            for (let x = 1; x <= outputCanvas.width; x++) {
+                const t = x / outputCanvas.width ; // Normalized time from 0 to 1
+                const angle = t * 8 *(Math.PI).toFixed(2) * frequency;
+                const y = amplitude*(-Math.abs(Math.sin(angle))) + outputCanvas.height / 2 ;
+                outputCtx.lineTo(x, y);
+            }
+            outputCtx.strokeStyle = 'red';
+            outputCtx.stroke();
+
+
+
+
+
+
+            // sammple labeling kardiyaaaa
+            // Label the graph
+            outputCtx.font = '16px Arial';
+            outputCtx.fillStyle = 'red';
+            outputCtx.fillText('Output (OP)', 10, 20);
+        }
+
+        // Initial draw with default parameters
+        updateParameters();
+    </script>
+</body>
+</html>
