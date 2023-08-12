@@ -3,29 +3,8 @@ let myDiv = document.getElementById("changeContent")
 let flag = 0;
 
 // creating an array and passing the number, questions, options, and answers
-let questions = [
-    {
-    numb: 1,
-    question: "Have you ever wondered how a metronome works? Or a heartbeat?     Well, the IC555 astable mode is a lot like these things. It's a circuit that generates a continuous square wave, which is a waveform that has a constant amplitude and frequency. The frequency of the square wave is determined by the values of the resistors and capacitor in the circuit. So, by changing the values of the resistors and capacitor, we can change the frequency of the square wave.",
-    answer: "",
-    options: [
-      "	",
-      "",
-      "",
-      ""
-    ]
-  },
-    {
-    numb: 2,
-    question:"In this experiment, we're going to build our own astable multivibrator circuit. We'll learn how to choose the right values of resistors and capacitors to create a square wave with a specific frequency. And we'll see how we can use the circuit to generate different types of signals.",
-    answer: "Cascading Style Sheet",
-    options: [
-      "",
-      "",
-      "",
-      ""
-    ]
-  },
+
+ 
   //   {
   //   numb: 3,
   //   question: "In this experiment, we're going to build our own astable multivibrator circuit. We'll learn how to choose the right values of resistors and capacitors to create a square wave with a specific frequency. And we'll see how we can use the circuit to generate different types of signals.",
@@ -39,7 +18,7 @@ let questions = [
   // },
 
 
-];
+
 /*===== SHOW NAVBAR  =====*/ 
 const showNavbar = (toggleId, navId, bodyId, headerId) =>{
   const toggle = document.getElementById(toggleId),
@@ -82,7 +61,7 @@ function updateHTML(){
   if(flag == 1)
   {
     console.log(flag);
-    myDiv.innerHTML = "Have you ever wondered how a metronome works? Or a heartbeat? Well, the IC555 astable mode is a lot like these things. It's a circuit that generates a continuous square wave, which is a waveform that has a constant amplitude and frequency. The frequency of the square wave is determined by the values of the resistors and capacitor in the circuit. So, by changing the values of the resistors and capacitor, we can change the frequency of the square wave. And they both use the same basic principle: a circuit that generates a continuous square wave. This circuit is called an astable multivibrator, and it can be built using an IC555 timer.";
+    myDiv.innerHTML = "Have you ever wondered how a metronome works? Or a heartbeat? <br> Well, the IC555 astable mode is a lot like these things. It's a circuit that generates a continuous square wave, which is a waveform that has a constant amplitude and frequency. The frequency of the square wave is determined by the values of the resistors and capacitor in the circuit. So, by changing the values of the resistors and capacitor, we can change the frequency of the square wave. And they both use the same basic principle: a circuit that generates a continuous square wave. This circuit is called an astable multivibrator, and it can be built using an IC555 timer.";
   }
   else if(flag == 2)
   {
